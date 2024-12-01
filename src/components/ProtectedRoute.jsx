@@ -1,7 +1,7 @@
 // src/components/ProtectedRoute.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from "react-router";
-import { isAuthenticated } from '../utils/auth'; 
+import { isAuthenticated } from '../gateway/auth'; 
 
 const ProtectedRoute = ({ children }) => {
   const [isAuthenticatedState, setIsAuthenticatedState] = useState(null);
@@ -10,7 +10,6 @@ const ProtectedRoute = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       const authStatus = await isAuthenticated();
-      console.log(authStatus)
       setIsAuthenticatedState(authStatus);
     };
 

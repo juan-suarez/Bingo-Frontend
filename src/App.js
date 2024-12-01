@@ -2,6 +2,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import ProtectedRoute from './components/ProtectedRoute';
+import { Login } from './pages/Login';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
               <h1>bingo</h1>
             </ProtectedRoute>
           } />
-          <Route path="/login" element={<h1>login</h1>} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<h1>register</h1>} />
         </Routes>
       </div>
