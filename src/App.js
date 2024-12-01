@@ -3,6 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
 import ProtectedRoute from './components/ProtectedRoute';
 import { Login } from './pages/Login';
+import { Register } from './pages/Register';
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<h1>register</h1>} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
     </Router>
