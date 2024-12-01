@@ -39,3 +39,26 @@ export const loger = async (email, password) => {
   }
 };
 
+export const register = async (email, password, userName) => {
+  try {
+    const response = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password, username:userName}),
+      credentials: "include",  
+    });
+
+    if (response.status === 201 || response.status === 400) {
+      return response;
+    }
+    console.log(response.status)
+    throw new Error("Hubo un problema con el servidor. Intenta más tarde.");
+
+  } catch (error) {
+    console.error("Error en login:", error.message); 
+    throw error; 
+  }
+};
+

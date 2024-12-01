@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { loger } from "../gateway/auth";
 import { useNavigate } from "react-router-dom";
+import { register } from "../gateway/auth";
 
 export const RegisterForm = () => {
   const [credentials, setCredentials] = useState({areValidCredentials:true});
@@ -10,9 +10,9 @@ export const RegisterForm = () => {
     e.preventDefault();
     const { email, password, userName} = credentials;
     try{
-      const response = await loger(email,password);
-      if( response.status == 200){
-        navigate('/');
+      const response = await register(email,password, userName);
+      if( response.status == 201){
+        navigate('/login');
         return;
       }
       const data = await response.json();
@@ -31,17 +31,17 @@ export const RegisterForm = () => {
         <h5 className="text-sm text-center">crea tu cuenta, ahora!</h5>
         {
           !credentials.areValidCredentials?
-          <h1 className="text-center text-red-600">{credentials.message}</h1>:
+          <h1 className="text-sm text-center text-red-600">{credentials.message}</h1>:
           null
         }
-        <div className="mt-12 mb-4 flex flex-col text-sm">
+        <div className="mt-8 mb-4 flex flex-col text-sm">
           <label className="" htmlFor="">usuario</label>
           <input 
             className="w-full border rounded-lg p-2" 
             type="text" 
             placeholder="BingoKing"
-            value={credentials.email}
-            onChange={(e)=>{setCredentials({...credentials, email: e.target.value})}}
+            value={credentials.userName}
+            onChange={(e)=>{setCredentials({...credentials, userName: e.target.value})}}
             required
           />
         </div>
