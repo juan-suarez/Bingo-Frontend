@@ -7,4 +7,9 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  safelist: [
+    {
+      pattern: /bg-(red|orange|yellow|green|blue|neutral)-(600|300)/,
+    }
+  ],
 }
