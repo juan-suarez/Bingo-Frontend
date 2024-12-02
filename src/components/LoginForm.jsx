@@ -12,6 +12,7 @@ export const LoginForm = () => {
     try{
       const response = await loger(email,password);
       if( response.status === 200){
+        localStorage.setItem('userName', credentials.email);
         navigate('/');
         return;
       }
