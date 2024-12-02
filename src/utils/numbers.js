@@ -8,3 +8,13 @@ export const getAllNumbers = () => {
 
   return matrix;
 };
+
+export const transformPLayerBoardToMatrix = (numbers) => {
+
+  const matrix = [];
+  for (let j = 0; j < 5; j++) {
+    matrix.push(numbers.slice(j * 5, (j + 1) * 5)); 
+  }
+
+  return matrix;
+}

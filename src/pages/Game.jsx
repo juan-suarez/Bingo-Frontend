@@ -1,9 +1,17 @@
 import { CalledNumbers } from "../components/CalledNumbers"
 import { LastResults } from "../components/LastResults"
+import { PlayerBoard } from "../components/PlayerBoard";
 
 export const Game = () => {
   const calledNumbers = [1,25];
-  const counter = '00:55'
+  const counter = '00:55';
+  const playerBoard = [
+    1, 2, 3, 4, 5,        
+    16, 17, 18, 19, 20,    
+    31, 32, 33, 34, 35,    
+    46, 47, 48, 49, 50,    
+    61, 62, 63, 64, 65     
+  ]
   return (
     <div className="w-screen h-screen grid grid-cols-4 gap-4 p-2  bg-gradient-to-r from-indigo-700 to-sky-600">
       <div className="grid grid-rows-4 gap-1 p-1 pt-2">
@@ -28,8 +36,8 @@ export const Game = () => {
             </div>
           }
         </div>
-        <div className="border-2 border-black row-span-4">
-          player board
+        <div className="row-span-4 px-20 py-2">
+          <PlayerBoard playerBoard={playerBoard}/>
         </div>
         <div className="border-2 border-black ">
           bingo button
