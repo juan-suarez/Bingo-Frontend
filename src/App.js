@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+import { Home } from './pages/Home';
+import { Game } from './pages/Game';
 
 function App() {
   return (
@@ -12,12 +14,12 @@ function App() {
         <Routes>
           <Route path="/" element={
             <ProtectedRoute>
-              home
+              <Home />
             </ProtectedRoute>
           } />
           <Route path="/bingo" element={
             <ProtectedRoute>
-              <h1>bingo</h1>
+              <Game />
             </ProtectedRoute>
           } />
           <Route path="/login" element={<Login />} />

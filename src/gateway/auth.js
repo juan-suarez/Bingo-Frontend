@@ -4,7 +4,6 @@ export const isAuthenticated = async () => {
       method: 'GET',
       credentials: 'include', 
     });
-    console.log(response)
     if (response.ok) {
       return true;
     } else {
