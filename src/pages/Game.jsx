@@ -1,15 +1,16 @@
+import { CalledNumbers } from "../components/CalledNumbers"
 import { LastResults } from "../components/LastResults"
 
 export const Game = () => {
-  const calledNumbers = [1]
+  const calledNumbers = [1,25]
   return (
     <div className="w-screen h-screen grid grid-cols-4 gap-4 p-2">
-      <div className="border-2 border-black grid grid-rows-4 gap-1 p-1">
+      <div className="grid grid-rows-4 gap-1 p-1 pt-2">
         <div className=" ">
           <LastResults numbers={calledNumbers}/>
         </div>
-        <div className="border-2 border-black row-span-3">
-          bingo board
+        <div className="row-span-3 flex items-center">
+          <CalledNumbers calledNumbers={calledNumbers}/>
         </div>
       </div>
       <div className="col-span-2 border-2 border-black grid grid-rows-6 gap-1 p-1">
