@@ -18,9 +18,7 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/bingo" element={
-            <ProtectedRoute>
-              <Game />
-            </ProtectedRoute>
+            <Game />
           } />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

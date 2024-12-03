@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const LoginForm = () => {
   const [credentials, setCredentials] = useState({areValidCredentials:true});
   const navigate = useNavigate();
+  localStorage.clear();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
