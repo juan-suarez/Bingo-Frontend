@@ -8,12 +8,21 @@ export const useGame = (socket) => {
   const [playerBoard, setPlayerBoard] = useState([]);
   const [calledNumbers, setCalledNumbers] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
+  const [isTableGenerated, setIsTableGenerated] = useState(false);
+
   const navigate = useNavigate();
   const removePlayer = () => {
     socket.emit('remove-player');
     navigate('/')
   }
 
+  const bingo = () => {
+    socket.emit('bingo');
+  }
+
+  const tableGenerator = () => {
+    setIsTableGenerated(true);
+  }
 
   const hasEmittedAddPlayer = useRef(false);
 
@@ -57,11 +66,31 @@ export const useGame = (socket) => {
       setCalledNumbers(message);
     };
 
+    const handlePlayerDisqualified = (message) => {
+      if(localStorage.getItem('userName') === message){
+        console.log("Descalificado");
+        socket.emit('remove-player')
+        navigate('/')
+      }
+    }
+
+    const handleGameFinished = (message) => {
+      socket.emit('remove-player');
+      if(socket.auth.userName === message){
+        console.log('GANASTE!!!!')
+      } else {
+        console.log('Mas suerte para la proxima :)')
+      }
+      navigate('/');
+    }
+
     socket.on("connected-users", handleConnectedUsers);
     socket.on("time-to-start", handleTimeToStart);
     socket.on("generate-table", handleGenerateTable);
     socket.on("started-game", handleStartedGame);
     socket.on("called-numbers", handleCalledNumbers);
+    socket.on("player-disqualified", handlePlayerDisqualified);
+    socket.on("game-finished", handleGameFinished);
 
     return () => {
       socket.off("connected-users", handleConnectedUsers);
@@ -71,13 +100,16 @@ export const useGame = (socket) => {
       socket.off("called-numbers", handleCalledNumbers);
     }
 
-  }, [socket ,playerBoard, timeToStart, gameStarted]);
+  }, [playerBoard, timeToStart, gameStarted]);
 
   return {
     timeToStart,
     players,
     playerBoard,
     calledNumbers,
-    removePlayer
+    removePlayer,
+    bingo,
+    isTableGenerated,
+    tableGenerator
   };
 };

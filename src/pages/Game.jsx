@@ -14,17 +14,17 @@ const socket = io("http://localhost:3000", {
 });
 
 export const Game = () => {
-  const [isTableGenerated, setIsTableGenerated] = useState(false);
 
-  const { timeToStart, playerBoard, players, calledNumbers, removePlayer} = useGame(socket);
-
-  const handleBingo = () => {
-    console.log("bingo!");
-  }
-
-  const tableGenerator = () => {
-    setIsTableGenerated(true);
-  }
+  const {
+    timeToStart,
+    playerBoard,
+    players,
+    calledNumbers,
+    removePlayer,
+    bingo,
+    tableGenerator,
+    isTableGenerated
+  } = useGame(socket);
 
   return (
     <div className="w-screen h-screen grid grid-cols-4 gap-4 p-2  bg-gradient-to-r from-indigo-700 to-sky-600">
@@ -60,7 +60,7 @@ export const Game = () => {
 
                 <button
                   className="bg-green-600 text-lg font-bold rounded-lg py-3 px-8 text-white"
-                  onClick={handleBingo}
+                  onClick={bingo}
                 >
                   Bingo!
                 </button>
@@ -96,7 +96,7 @@ export const Game = () => {
           <PlayersInGame players={players} />
         </div>
         <div className="flex justify-center items-center">
-          <button 
+          <button
             className="px-8 py-2 bg-yellow-600 rounded font-bold text-white"
             onClick={removePlayer}
           >
