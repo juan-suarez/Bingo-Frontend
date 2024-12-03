@@ -27,7 +27,6 @@ export const useGame = (socket) => {
   const hasEmittedAddPlayer = useRef(false);
 
   useEffect(() => {
-    console.log()
     if (!hasEmittedAddPlayer.current) {
       socket.emit('add-player');
       hasEmittedAddPlayer.current = true;
@@ -40,7 +39,6 @@ export const useGame = (socket) => {
   useEffect(() => {
     const handleConnectedUsers = (message) => {
       setPlayers(message);
-      console.log(message);
     };
 
 
@@ -62,13 +60,12 @@ export const useGame = (socket) => {
     };
 
     const handleCalledNumbers = (message) => {
-      console.log(message);
       setCalledNumbers(message);
     };
 
     const handlePlayerDisqualified = (message) => {
       if(localStorage.getItem('userName') === message){
-        console.log("Descalificado");
+        console.log('Descalificado')
         socket.emit('remove-player')
         navigate('/')
       }
@@ -76,7 +73,7 @@ export const useGame = (socket) => {
 
     const handleGameFinished = (message) => {
       socket.emit('remove-player');
-      if(socket.auth.userName === message){
+      if(localStorage.getItem('userName') === message){
         console.log('GANASTE!!!!')
       } else {
         console.log('Mas suerte para la proxima :)')
@@ -100,7 +97,7 @@ export const useGame = (socket) => {
       socket.off("called-numbers", handleCalledNumbers);
     }
 
-  }, [playerBoard, timeToStart, gameStarted]);
+  }, [socket, playerBoard, gameStarted]);
 
   return {
     timeToStart,
