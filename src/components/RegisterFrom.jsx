@@ -16,7 +16,6 @@ export const RegisterForm = () => {
         return;
       }
       const data = await response.json();
-      console.log(data)
       setCredentials({...credentials, areValidCredentials: false, message: data.meessage || data.message});
     }catch(error){
       console.log(error)

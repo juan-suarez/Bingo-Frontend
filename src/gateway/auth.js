@@ -29,7 +29,6 @@ export const loger = async (email, password) => {
     if (response.status === 200 || response.status === 400) {
       return response;
     }
-    console.log(response.status)
     throw new Error("Hubo un problema con el servidor. Intenta más tarde.");
 
   } catch (error) {
@@ -52,7 +51,6 @@ export const register = async (email, password, userName) => {
     if (response.status === 201 || response.status === 400) {
       return response;
     }
-    console.log(response.status)
     throw new Error("Hubo un problema con el servidor. Intenta más tarde.");
 
   } catch (error) {

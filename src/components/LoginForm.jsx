@@ -5,18 +5,19 @@ import { useNavigate } from "react-router-dom";
 export const LoginForm = () => {
   const [credentials, setCredentials] = useState({areValidCredentials:true});
   const navigate = useNavigate();
+  localStorage.clear();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
     const { email, password} = credentials;
     try{
       const response = await loger(email,password);
+      const data = await response.json();
       if( response.status === 200){
+        localStorage.setItem('userName', data.userName);
         navigate('/');
         return;
       }
-      const data = await response.json();
-      console.log(data)
       setCredentials({...credentials, areValidCredentials: false, message: data.meessage || data.message});
     }catch(error){
       console.log(error)
